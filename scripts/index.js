@@ -2,41 +2,24 @@ function code(message, key) {
   var message_size = message.length;
   var key_size = key.length;
 
-  var key_values = new Array();
+  var key_values = [];
 
   for (i = 0; i < key_size; i++) {
     key_values[i] = key[i].charCodeAt();
   }
 
-  // Cifrar
-  var coded_message = new Array();
+  var coded_message = [];
 
   for (i = 0; i < message_size; i++) {
     var char_pos = message[i].charCodeAt();
     var ascii_value = (key_values[i % key_size] + char_pos) % ALPH_SIZE;
-
-    // for (j = 0; j < ALPH_SIZE; j++) {
-    //   if (message[i] == alphabet[j]) {
-    //     char_pos = j;
-    //   }
-    // }
-
-    // coded_message[i] =
-    //   alphabet[(key_values[i % key_size] + char_pos) % ALPH_SIZE];
-
     coded_message[i] = String.fromCharCode(ascii_value);
   }
 
-  var result = "";
-
-  for (i = 0; i < message_size; i++) {
-    result += coded_message[i];
-  }
-
-  return result;
+  return coded_message.join("");
 }
 
-function modNeg(n1, n2) {
+function negMod(n1, n2) {
   var mod = n1;
 
   while (mod < 0) {
@@ -50,39 +33,21 @@ function decode(message, key) {
   var key_size = key.length;
   var message_size = message.length;
 
-  // Guardar valores de la key
-  var key_values = new Array();
+  var key_values = [];
 
   for (i = 0; i < key_size; i++) {
     key_values[i] = key[i].charCodeAt();
   }
 
-  // Descifrar
-  var decoded_message = new Array();
+  var decoded_message = [];
 
   for (i = 0; i < message_size; i++) {
     var char_pos = message[i].charCodeAt();
-    var ascii_value = modNeg(char_pos - key_values[i % key_size], ALPH_SIZE);
-
-    // for (j = 0; j < ALPH_SIZE; j++) {
-    //   if (message[i] == alphabet[j]) {
-    //     char_pos = j;
-    //   }
-    // }
-
-    // decoded_message[i] =
-    //   alphabet[modNeg(char_pos - key_values[i % key_size], ALPH_SIZE)];
-
+    var ascii_value = negMod(char_pos - key_values[i % key_size], ALPH_SIZE);
     decoded_message[i] = String.fromCharCode(ascii_value);
   }
 
-  var result = "";
-
-  for (i = 0; i < message_size; i++) {
-    result += decoded_message[i];
-  }
-
-  return result;
+  return decoded_message.join("");
 }
 
 const cipher = function () {
@@ -118,9 +83,3 @@ const errorInputText = document.getElementById("errorInputText");
 const errorInputKey = document.getElementById("errorInputKey");
 
 const ALPH_SIZE = 256;
-
-// const alphabet = new Array();
-
-// for (i = 0; i < ALPH_SIZE; i++) {
-//   alphabet[i] = String.fromCharCode(0 + i);
-// }
