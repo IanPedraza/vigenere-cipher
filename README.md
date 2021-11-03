@@ -1,2 +1,3 @@
-# caesars-cipher
-This is the caesars cipher made in javascript
+# vigenere-cipher
+
+This is the vigenere cipher made in javascript
