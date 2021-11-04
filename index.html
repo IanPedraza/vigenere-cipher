@@ -21,14 +21,17 @@
         <div class="input-container">
           <label for="input-area">
             Ingresa el texto a cifrar:
-            <textarea name="input-area" id="inputText" cols="30" rows="5">
-Hello</textarea
-            >
+            <textarea
+              name="input-area"
+              id="inputText"
+              cols="30"
+              rows="5"
+            ></textarea>
             <p class="error" id="errorInputText"></p>
           </label>
           <label for="input-key">
             Ingresa la clave:
-            <input type="text" id="inputKey" name="input-key" value="meta" />
+            <input type="text" id="inputKey" name="input-key" />
             <p class="error" id="errorInputKey"></p>
           </label>
           <button onclick="cipher()">Cifrar</button>
