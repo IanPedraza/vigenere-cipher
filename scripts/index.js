@@ -8,15 +8,15 @@ function code(message, key) {
     key_values[i] = key[i].charCodeAt();
   }
 
-  var coded_message = [];
+  var coded_message = "";
 
   for (i = 0; i < message_size; i++) {
     var char_pos = message[i].charCodeAt();
     var ascii_value = (key_values[i % key_size] + char_pos) % ALPH_SIZE;
-    coded_message[i] = String.fromCharCode(ascii_value);
+    coded_message += String.fromCharCode(ascii_value);
   }
 
-  return coded_message.join("");
+  return coded_message;
 }
 
 function negMod(n1, n2) {
@@ -39,15 +39,15 @@ function decode(message, key) {
     key_values[i] = key[i].charCodeAt();
   }
 
-  var decoded_message = [];
+  var decoded_message = "";
 
   for (i = 0; i < message_size; i++) {
     var char_pos = message[i].charCodeAt();
     var ascii_value = negMod(char_pos - key_values[i % key_size], ALPH_SIZE);
-    decoded_message[i] = String.fromCharCode(ascii_value);
+    decoded_message += String.fromCharCode(ascii_value);
   }
 
-  return decoded_message.join("");
+  return decoded_message;
 }
 
 const cipher = function () {
