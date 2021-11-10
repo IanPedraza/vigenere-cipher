@@ -1,4 +1,4 @@
-function code(message, key) {
+function _code(message, key) {
   var message_size = message.length;
   var key_size = key.length;
 
@@ -19,17 +19,7 @@ function code(message, key) {
   return coded_message;
 }
 
-function negMod(n1, n2) {
-  var mod = n1;
-
-  while (mod < 0) {
-    mod += n2;
-  }
-
-  return mod;
-}
-
-function decode(message, key) {
+function _decode(message, key) {
   var key_size = key.length;
   var message_size = message.length;
 
@@ -50,7 +40,17 @@ function decode(message, key) {
   return decoded_message;
 }
 
-const cipher = function () {
+function negMod(n1, n2) {
+  var mod = n1;
+
+  while (mod < 0) {
+    mod += n2;
+  }
+
+  return mod;
+}
+
+const code = function () {
   errorInputText.innerText = null;
   errorInputKey.innerText = null;
 
@@ -68,11 +68,46 @@ const cipher = function () {
     return;
   }
 
-  let coded = code(input, key);
-  let decoded = decode(coded, key);
+  let coded = _code(input, key);
+  let decoded = _decode(coded, key);
 
   inputCipher.innerText = coded;
   inputUncipher.innerText = decoded;
+};
+
+const decode = function () {
+  errorInputText.innerText = null;
+  errorInputKey.innerText = null;
+
+  let input = inputText.value;
+
+  if (!input) {
+    errorInputText.innerText = "El mensaje no puede quedar vacío.";
+    return;
+  }
+
+  let key = inputKey.value;
+
+  if (!key) {
+    errorInputKey.innerText = "La clave no puede quedar vacía.";
+    return;
+  }
+
+  let decoded = _decode(input, key);
+
+  inputCipher.innerText = input;
+  inputUncipher.innerText = decoded;
+};
+
+const clean = function () {
+  inputText.value = null;
+  inputKey.value = null;
+
+  errorInputText.innerText = null;
+  errorInputKey.innerText = null;
+
+  inputCipher.value = null;
+  inputUncipher.value = null;
 };
 
 const inputKey = document.getElementById("inputKey");
